@@ -1,0 +1,9 @@
+{
+    "name": "drupal/ga_custom_events",
+    "description": "Adds the ability to apply GA custom events using data attributes.",
+    "type": "drupal-module",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "drupal/core": "^8.8 || ^9"
+    }
+}

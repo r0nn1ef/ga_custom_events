@@ -1,0 +1,39 @@
+<?php
+
+/**
+ * @file
+ * Contains ga_custom_events.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function ga_custom_events_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the ga_custom_events module.
+    case 'help.page.ga_custom_events':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Allows content editors to add GA custom events using data attributes.') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_page_attachments().
+ *
+ * Adds the GTM custom events library to the page for non-admin routes.
+ *
+ * @param array $page
+ */
+function ga_custom_events_page_attachments(array &$page) {
+  // We don't want to track events on admin routes.
+  if ( \Drupal::service('router.admin_context')->isAdminRoute() ) {
+    return;
+  }
+  $page['#attached']['library'][] = 'ga_custom_events/ga-custom-events';
+}

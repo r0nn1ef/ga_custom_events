@@ -1,0 +1,6 @@
+ga-custom-events:
+  version: VERSION
+  js:
+    js/ga-custom-events.js: {}
+  dependencies:
+    - core/drupal
