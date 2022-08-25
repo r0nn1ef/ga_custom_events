@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * Create default configuration for GA Custom Events.
+ */
+function ga_custom_events_update_9001(&$sandbox) {
+  $data = [
+    'disable_data_layer' => false,
+    'enable_debug' => false,
+  ];
+  \Drupal::configFactory()->getEditable('ga_custom_events.settings')
+    ->setData($data)
+    ->save();
+}

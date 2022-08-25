@@ -1,0 +1,6 @@
+ga_custom_events.settings_form:
+  title: 'GA Custom Events'
+  route_name: ga_custom_events.settings_form
+  description: 'Change settings for the GA Custom Events module.'
+  parent: system.admin_config_services
+  weight: 99

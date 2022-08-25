@@ -4,3 +4,5 @@ ga-custom-events:
     js/ga-custom-events.js: {}
   dependencies:
     - core/drupal
+    - core/drupalSettings
+    - core/once

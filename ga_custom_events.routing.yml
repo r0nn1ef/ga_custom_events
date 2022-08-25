@@ -1,0 +1,9 @@
+ga_custom_events.settings_form:
+  path: '/admin/config/service/ga-custom-events'
+  defaults:
+    _form: '\Drupal\ga_custom_events\Form\SettingsForm'
+    _title: 'GA Custom Events Settings'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE

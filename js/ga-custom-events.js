@@ -1,31 +1,41 @@
 (function ( Drupal ) {
   Drupal.behaviors.gaCustomEventsBehavior = {
     attach: function (context, settings) {
-      var elements = document.querySelectorAll('[data-ga-event]');
-      for( var i=0;i<elements.length;i++) {
-        var gtmEvent = elements[i].getAttribute('data-ga-event');
-        var gtmCategory = elements[i].getAttribute('data-ga-category');
-        var gtmAction = elements[i].getAttribute('data-ga-action');
-        var gtmLabel = elements[i].getAttribute('data-ga-label');
-        if( gtmEvent != undefined && gtmCategory != undefined && gtmAction != undefined && gtmLabel != undefined ) {
-          elements[i].addEventListener('click', function(){
-            Drupal.behaviors.gaCustomEventsBehavior.addDataLayerEvent(this);
-          });
-        }
-      }
+      // var elements = document.querySelectorAll('[data-ga-event]');
+      // for( var i=0;i<elements.length;i++) {
+      //
+      // }
+      const elements = once('ga_custom_events', '[data-ga-event]', context);
+      // `elements` is always an Array.
+      elements.forEach(this.processingCallback);
+      // Drupal.behaviors.gaCustomEventsBehavior.addDataLayerEvent(this);
     },
-    addDataLayerEvent: function(element) {
+    processingCallback: function(value, index) {
+      value.addEventListener('click', Drupal.behaviors.gaCustomEventsBehavior.addDataLayerEvent);
+    },
+    addDataLayerEvent: function(event) {
+      var element = event.target;
       if ( window.dataLayer != undefined ) {
-        var gtmEvent = element.getAttribute('data-ga-event');
-        var gtmCategory = element.getAttribute('data-ga-category');
-        var gtmAction = element.getAttribute('data-ga-action');
-        var gtmLabel = element.getAttribute('data-ga-label');
-        window.dataLayer.push({
-          'event': gtmEvent,
-          'category': gtmCategory,
-          'action': gtmAction,
-          'label': gtmLabel,
-        });
+        var trackingObject = {
+          'event': element.getAttribute('data-ga-event'),
+          'category': element.getAttribute('data-ga-category'),
+          'action': element.getAttribute('data-ga-action'),
+          'label': element.getAttribute('data-ga-label'),
+        };
+
+        if ( drupalSettings.gacustomevents.settings.enable_debug === true ) {
+          console.log('trackingObject', trackingObject);
+        }
+
+        if ( drupalSettings.gacustomevents.settings.disable_data_layer === false ) {
+          window.dataLayer.push(trackingObject);
+        } else {
+          console.log('dataLayer.push() has been disabled.');
+        }
+      } else {
+        if ( drupalSettings.gacustomevents.settings.enable_debug === true ) {
+          console.warn('window.dataLayer is not defined. You will need to implement Google Tag Manager or Google Analytics to use this feature.');
+        }
       }
     }
   };

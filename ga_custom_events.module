@@ -35,5 +35,10 @@ function ga_custom_events_page_attachments(array &$page) {
   if ( \Drupal::service('router.admin_context')->isAdminRoute() ) {
     return;
   }
+  $config = \Drupal::config('ga_custom_events.settings');
+  $page['#attached']['drupalSettings']['gacustomevents']['settings'] = [
+    'disable_data_layer' => (bool)$config->get('disable_datalayer'),
+    'enable_debug' => (bool)$config->get('enable_debugging')
+  ];
   $page['#attached']['library'][] = 'ga_custom_events/ga-custom-events';
 }
