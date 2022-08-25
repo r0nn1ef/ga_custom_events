@@ -37,8 +37,8 @@ function ga_custom_events_page_attachments(array &$page) {
   }
   $config = \Drupal::config('ga_custom_events.settings');
   $page['#attached']['drupalSettings']['gacustomevents']['settings'] = [
-    'disable_data_layer' => (bool)$config->get('disable_datalayer'),
-    'enable_debug' => (bool)$config->get('enable_debugging')
+    'disable_datalayer' => (bool)$config->get('disable_datalayer'),
+    'enable_debugging' => (bool)$config->get('enable_debugging')
   ];
   $page['#attached']['library'][] = 'ga_custom_events/ga-custom-events';
 }
