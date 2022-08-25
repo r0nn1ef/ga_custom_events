@@ -21,6 +21,7 @@
           'category': element.getAttribute('data-ga-category'),
           'action': element.getAttribute('data-ga-action'),
           'label': element.getAttribute('data-ga-label'),
+          'page_title': document.title
         };
 
         if ( drupalSettings.gacustomevents.settings.enable_debug === true ) {
