@@ -24,11 +24,11 @@
           'page_title': document.title
         };
 
-        if ( drupalSettings.gacustomevents.settings.enable_debug === true ) {
+        if ( drupalSettings.gacustomevents.settings.enable_debugging === true ) {
           console.log('trackingObject', trackingObject);
         }
 
-        if ( drupalSettings.gacustomevents.settings.disable_data_layer === false ) {
+        if ( drupalSettings.gacustomevents.settings.disable_datalayer === false ) {
           window.dataLayer.push(trackingObject);
         } else {
           console.log('dataLayer.push() has been disabled.');
